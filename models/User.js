@@ -4,7 +4,7 @@
 
 module.exports = (bookshelf) => {
 	return bookshelf.model('User', {
-		tableName: 'user',
+		tableName: 'users',
 		photos() {
 			return this.hasMany('Photo')
 		},
