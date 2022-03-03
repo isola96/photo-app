@@ -2,7 +2,7 @@
  * Example Controller
  */
 
-const debug = require('debug')('books:example_controller');
+const debug = require('debug')('photos:album_controller');
 const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
@@ -12,26 +12,30 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const examples = await models.Example.fetchAll();
+	const all_albums = await models.Album.fetchAll();
 
 	res.send({
 		status: 'success',
-		data: examples,
+		data: {
+			albums: all_albums
+		}
 	});
 }
 
 /**
  * Get a specific resource
  *
- * GET /:exampleId
+ * GET /:albumId
  */
 const show = async (req, res) => {
-	const example = await new models.Example({ id: req.params.exampleId })
-		.fetch();
+	const album = await new models.Album({ id: req.params.albumId })
+		.fetch({ withRelated: ['photo']});
 
 	res.send({
 		status: 'success',
-		data: example,
+		data: {
+			album
+		}
 	});
 }
 
