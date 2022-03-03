@@ -12,11 +12,13 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const examples = await models.Example.fetchAll();
+	const all_users = await models.User.fetchAll();
 
 	res.send({
 		status: 'success',
-		data: examples,
+		data: {
+			users: all_users,
+		}
 	});
 }
 
@@ -26,7 +28,7 @@ const index = async (req, res) => {
  * GET /:exampleId
  */
 const show = async (req, res) => {
-	const example = await new models.Example({ id: req.params.userId })
+	const user = await new models.User({ id: req.params.userId })
 		.fetch();
 
 	res.send({
