@@ -1,5 +1,5 @@
 /**
- * Example Controller
+ * User Controller
  */
 
 const debug = require('debug')('photos:user_controller');
@@ -26,12 +26,14 @@ const index = async (req, res) => {
  * GET /:exampleId
  */
 const show = async (req, res) => {
-	const example = await new models.Example({ id: req.params.exampleId })
+	const example = await new models.Example({ id: req.params.userId })
 		.fetch();
 
 	res.send({
 		status: 'success',
-		data: example,
+		data: {
+			user,
+		}
 	});
 }
 
@@ -51,12 +53,14 @@ const store = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const example = await new models.Example(validData).save();
-		debug("Created new example successfully: %O", example);
+		const user = await new models.User(validData).save();
+		debug("Created new example successfully: %O", user);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				user
+			},
 		});
 
 	} catch (error) {
@@ -74,15 +78,15 @@ const store = async (req, res) => {
  * PUT /:exampleId
  */
 const update = async (req, res) => {
-	const exampleId = req.params.exampleId;
+	const exampleId = req.params.userId;
 
 	// make sure example exists
-	const example = await new models.Example({ id: exampleId }).fetch({ require: false });
+	const example = await new models.Example({ id: userId }).fetch({ require: false });
 	if (!example) {
-		debug("Example to update was not found. %o", { id: exampleId });
+		debug("Example to update was not found. %o", { id: userId });
 		res.status(404).send({
 			status: 'fail',
-			data: 'Example Not Found',
+			data: 'User Not Found',
 		});
 		return;
 	}
@@ -97,18 +101,20 @@ const update = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const updatedExample = await example.save(validData);
-		debug("Updated example successfully: %O", updatedExample);
+		const updatedUser = await user.save(validData);
+		debug("Updated user successfully: %O", updatedUser);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				user,
+			},
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when updating a new example.',
+			message: 'Exception thrown in database when updating a new user.',
 		});
 		throw error;
 	}
@@ -122,7 +128,7 @@ const update = async (req, res) => {
 const destroy = (req, res) => {
 	res.status(400).send({
 		status: 'fail',
-		message: 'You need to write the code for deleting this resource yourself.',
+		message: 'Nope',
 	});
 }
 
