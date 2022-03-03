@@ -1,5 +1,5 @@
 /**
- * Example Controller
+ * Album Controller
  */
 
 const debug = require('debug')('photos:album_controller');
@@ -55,18 +55,20 @@ const store = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const example = await new models.Example(validData).save();
-		debug("Created new example successfully: %O", example);
+		const album = await new models.Album(validData).save();
+		debug("Created new album successfully: %O", album);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				album
+			}
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when creating a new example.',
+			message: 'Exception thrown in database when creating a new album.',
 		});
 		throw error;
 	}
@@ -78,15 +80,15 @@ const store = async (req, res) => {
  * PUT /:exampleId
  */
 const update = async (req, res) => {
-	const exampleId = req.params.exampleId;
+	const albumId = req.params.albumId;
 
 	// make sure example exists
-	const example = await new models.Example({ id: exampleId }).fetch({ require: false });
-	if (!example) {
-		debug("Example to update was not found. %o", { id: exampleId });
+	const album = await new models.Album({ id: albumId }).fetch({ require: false });
+	if (!album) {
+		debug("Album to update was not found. %o", { id: albumId });
 		res.status(404).send({
 			status: 'fail',
-			data: 'Example Not Found',
+			data: 'Album Not Found',
 		});
 		return;
 	}
@@ -101,18 +103,20 @@ const update = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const updatedExample = await example.save(validData);
-		debug("Updated example successfully: %O", updatedExample);
+		const updatedAlbum = await album.save(validData);
+		debug("Updated album successfully: %O", updatedAlbum);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				album,
+			}
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when updating a new example.',
+			message: 'Exception thrown in database when updating a new album.',
 		});
 		throw error;
 	}

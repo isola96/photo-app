@@ -1,5 +1,5 @@
 /**
- * Example Controller
+ * Photo Controller
  */
 
 const debug = require('debug')('photos:photo_controller');
@@ -12,11 +12,13 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const examples = await models.Example.fetchAll();
+	const all_photos = await models.Photo.fetchAll();
 
 	res.send({
 		status: 'success',
-		data: examples,
+		data: {
+			photos: all_photos,
+		}
 	});
 }
 
@@ -26,12 +28,14 @@ const index = async (req, res) => {
  * GET /:exampleId
  */
 const show = async (req, res) => {
-	const example = await new models.Example({ id: req.params.exampleId })
+	const photo = await new models.Photo({ id: req.params.photoId })
 		.fetch();
 
 	res.send({
 		status: 'success',
-		data: example,
+		data: {
+			photo,
+		}
 	});
 }
 
@@ -51,18 +55,20 @@ const store = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const example = await new models.Example(validData).save();
-		debug("Created new example successfully: %O", example);
+		const photo = await new models.Photo(validData).save();
+		debug("Created new photo successfully: %O", photo);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				photo,
+			}
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when creating a new example.',
+			message: 'Exception thrown in database when creating a new photo.',
 		});
 		throw error;
 	}
@@ -74,15 +80,15 @@ const store = async (req, res) => {
  * PUT /:exampleId
  */
 const update = async (req, res) => {
-	const exampleId = req.params.exampleId;
+	const photoId = req.params.photoId;
 
 	// make sure example exists
-	const example = await new models.Example({ id: exampleId }).fetch({ require: false });
+	const photo = await new models.Photo({ id: photoId }).fetch({ require: false });
 	if (!example) {
-		debug("Example to update was not found. %o", { id: exampleId });
+		debug("Photo to update was not found. %o", { id: exampleId });
 		res.status(404).send({
 			status: 'fail',
-			data: 'Example Not Found',
+			data: 'Photo Not Found',
 		});
 		return;
 	}
@@ -97,18 +103,20 @@ const update = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const updatedExample = await example.save(validData);
-		debug("Updated example successfully: %O", updatedExample);
+		const updatedPhoto = await photo.save(validData);
+		debug("Updated photo successfully: %O", updatedPhoto);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: {
+				photo,
+			},
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when updating a new example.',
+			message: 'Exception thrown in database when updating a new photo.',
 		});
 		throw error;
 	}

@@ -56,7 +56,7 @@ const store = async (req, res) => {
 
 	try {
 		const user = await new models.User(validData).save();
-		debug("Created new example successfully: %O", user);
+		debug("Created new user successfully: %O", user);
 
 		res.send({
 			status: 'success',
@@ -68,7 +68,7 @@ const store = async (req, res) => {
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when creating a new example.',
+			message: 'Exception thrown in database when creating a new user.',
 		});
 		throw error;
 	}
@@ -80,12 +80,12 @@ const store = async (req, res) => {
  * PUT /:exampleId
  */
 const update = async (req, res) => {
-	const exampleId = req.params.userId;
+	const userId = req.params.userId;
 
 	// make sure example exists
-	const example = await new models.Example({ id: userId }).fetch({ require: false });
-	if (!example) {
-		debug("Example to update was not found. %o", { id: userId });
+	const user = await new models.User({ id: userId }).fetch({ require: false });
+	if (!user) {
+		debug("User to update was not found. %o", { id: userId });
 		res.status(404).send({
 			status: 'fail',
 			data: 'User Not Found',
