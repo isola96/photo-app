@@ -54,6 +54,8 @@ const store = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
+	console.log("The valid data:", validData);
+
 	try {
 		const user = await new models.User(validData).save();
 		debug("Created new user successfully: %O", user);
