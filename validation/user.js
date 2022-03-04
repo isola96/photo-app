@@ -1,28 +1,25 @@
 /**
- * Example Validation Rules
+ * User Validation Rules
  */
 
  const { body } = require('express-validator');
  const models = require('../models');
  
  /**
-  * Create Example validation rules
-  *
-  * Required: title
-  * Optional: -
+  * Create user validation rules
   */
  const createRules = [
-     body('title').exists().isLength({ min: 4 }),
+    body('email').exists().isLength({min:6}),
+    body('password').exists().isLength({min:8}),
+    body('first_name').exists().isLength({min:2}),
+    body('last_name').exists().isLength({min:2}),
  ];
  
  /**
-  * Update Example validation rules
-  *
-  * Required: -
-  * Optional: title
+  * Update user validation rules
   */
  const updateRules = [
-     body('title').optional().isLength({ min: 4 }),
+     body('title').optional()
  ];
  
  module.exports = {

@@ -77,7 +77,7 @@ const store = async (req, res) => {
 /**
  * Update a specific resource
  *
- * PUT /:exampleId
+ * PUT /:userId
  */
 const update = async (req, res) => {
 	const userId = req.params.userId;
@@ -125,7 +125,7 @@ const update = async (req, res) => {
 /**
  * Destroy a specific resource
  *
- * DELETE /:exampleId
+ * DELETE /:userId
  */
 const destroy = (req, res) => {
 	res.status(400).send({

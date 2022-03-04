@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user_controller');
-// const userValidationRules = require('../validation/user');
+const userValidationRules = require('../validation/user');
 
 /* Get all users */
 router.get('/', userController.index);
@@ -10,12 +10,10 @@ router.get('/', userController.index);
 router.get('/:userId', userController.show);
 
 /* Store a new user */
-router.post('/', userController.store);
-// userValidationRules.createRules,
+router.post('/', userValidationRules.createRules, userController.store);
 
 /* Update a specific user */
-router.put('/:userId', userController.update);
-// userValidationRules.updateRules,
+router.put('/:userId', userValidationRules.updateRules, userController.update);
 
 /* Destroy a specific user */
 router.delete('/:userId', userController.destroy);
