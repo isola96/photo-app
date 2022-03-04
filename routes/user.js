@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user_controller');
-const userValidationRules = require('../validation/user');
+const userValidationRules = require('../validation/user_validation');
 
 /* Get all users */
 router.get('/', userController.index);

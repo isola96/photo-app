@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const photoController = require('../controllers/photo_controller');
-// const photoValidationRules = require('../validation/photo');
+const photoValidationRules = require('../validation/photo_validation');
 
 /* Get all photos */
 router.get('/', photoController.index);
@@ -10,12 +10,10 @@ router.get('/', photoController.index);
 router.get('/:photoId', photoController.show);
 
 /* Store a new photo */
-router.post('/', photoController.store);
-// photoValidationRules.createRules,
+router.post('/', photoValidationRules.createRules, photoController.store);
 
 /* Update a specific photo */
-router.put('/:photoId', photoController.update);
-// photoValidationRules.updateRules,
+router.put('/:photoId', photoValidationRules.updateRules, photoController.update);
 
 /* Destroy a specific photo */
 router.delete('/:photoId', photoController.destroy);

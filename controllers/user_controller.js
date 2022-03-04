@@ -77,14 +77,14 @@ const store = async (req, res) => {
 }
 
 /**
- * Update a specific resource
+ * Update a specific user
  *
  * PUT /:userId
  */
 const update = async (req, res) => {
 	const userId = req.params.userId;
 
-	// make sure example exists
+	// make sure user exists
 	const user = await new models.User({ id: userId }).fetch({ require: false });
 	if (!user) {
 		debug("User to update was not found. %o", { id: userId });
@@ -103,6 +103,8 @@ const update = async (req, res) => {
 
 	// get only the validated data from the request
 	const validData = matchedData(req);
+
+	console.log("The valid data:", validData);
 
 	try {
 		const updatedUser = await user.save(validData);
