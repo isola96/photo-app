@@ -7,7 +7,7 @@ const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
 /**
- * Get all resources
+ * Get all users
  *
  * GET /
  */
@@ -23,13 +23,13 @@ const index = async (req, res) => {
 }
 
 /**
- * Get a specific resource
+ * Get a specific user
  *
  * GET /:exampleId
  */
 const show = async (req, res) => {
 	const user = await new models.User({ id: req.params.userId })
-		.fetch();
+		.fetch({ withRelated: ['album']});
 
 	res.send({
 		status: 'success',
@@ -40,7 +40,7 @@ const show = async (req, res) => {
 }
 
 /**
- * Store a new resource
+ * Store a new user
  *
  * POST /
  */
