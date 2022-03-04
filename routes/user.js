@@ -3,21 +3,21 @@ const router = express.Router();
 const userController = require('../controllers/user_controller');
 // const userValidationRules = require('../validation/user');
 
-/* Get all resources */
+/* Get all users */
 router.get('/', userController.index);
 
-/* Get a specific resource */
+/* Get a specific user */
 router.get('/:userId', userController.show);
 
-/* Store a new resource */
+/* Store a new user */
 router.post('/', userController.store);
 // userValidationRules.createRules,
 
-/* Update a specific resource */
+/* Update a specific user */
 router.put('/:userId', userController.update);
 // userValidationRules.updateRules,
 
-/* Destroy a specific resource */
+/* Destroy a specific user */
 router.delete('/:userId', userController.destroy);
 
 module.exports = router;
