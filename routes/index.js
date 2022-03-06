@@ -7,8 +7,8 @@ router.get('/', (req, res, next) => {
 	res.send({ success: true, data: { msg: 'oh, hi' }});
 });
 
-router.use('/album', require('./album'));
-router.use('/photo', require('./photo'));
+router.use('/album', auth.basic, require('./album'));
+router.use('/photo', auth.basic, require('./photo'));
 router.use('/user', require('./user'));
 router.use('/profile', auth.basic, require('./profile'));
 
