@@ -23,11 +23,6 @@
  
      debug("Authorization header: %o", req.headers.authorization);
  
-     // split header into "<authSchema> <base64Payload>"
-     // "Basic cGVsbGU6c3ZhbnNsb3M="
-     // =>
-     // [0] = "Basic"
-     // [1] = "cGVsbGU6c3ZhbnNsb3M="
      const [authSchema, base64Payload] = req.headers.authorization.split(' ');
  
      // if authSchema isn't "basic", then bail
@@ -45,10 +40,10 @@
      // decodedPayload = "username:password"
  
      // split decoded payload into "<username>:<password>"
-     const [username, password] = decodedPayload.split(':');
+     const [email, password] = decodedPayload.split(':');
  
      // check if a user with this username and password exists
-     const user = await new User({ username, password }).fetch({ require: false });
+     const user = await new User({ email, password }).fetch({ require: false });
      if (!user) {
          return res.status(401).send({
              status: 'fail',
