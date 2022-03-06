@@ -26,8 +26,15 @@
   * Update user validation rules 
   */
  const updateRules = [
-     body('email').optional().isLength({min:6}),
-     body('password').optional().isLength({min:6}),
+   body('email').optional().isLength({min:6}).custom(async value => {
+		const user = await new models.User({ email: value }).fetch({ require: false });
+		if (user) {
+			return Promise.reject("Email already exists.");
+		}
+
+		return Promise.resolve();
+	}),
+    body('password').optional().isLength({min:6}),
     body('first_name').optional().isLength({min:3}),
     body('last_name').optional().isLength({min:3}),
  ];
