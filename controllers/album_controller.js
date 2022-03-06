@@ -29,7 +29,7 @@ const index = async (req, res) => {
  */
 const show = async (req, res) => {
 	const album = await new models.Album({ id: req.params.albumId })
-		.fetch({ withRelated: ['photo']});
+		.fetch();
 
 	res.send({
 		status: 'success',
@@ -77,7 +77,7 @@ const store = async (req, res) => {
 /**
  * Update a specific resource
  *
- * PUT /:exampleId
+ * PUT /:albumId
  */
 const update = async (req, res) => {
 	const albumId = req.params.albumId;
