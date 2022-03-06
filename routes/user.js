@@ -15,7 +15,4 @@ router.post('/', userValidationRules.createRules, userController.store);
 /* Update a specific user */
 router.put('/:userId', userValidationRules.updateRules, userController.update);
 
-/* Destroy a specific user */
-router.delete('/:userId', userController.destroy);
-
 module.exports = router;

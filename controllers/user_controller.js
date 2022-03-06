@@ -126,22 +126,9 @@ const update = async (req, res) => {
 	}
 }
 
-/**
- * Destroy a specific resource
- *
- * DELETE /:userId
- */
-const destroy = (req, res) => {
-	res.status(400).send({
-		status: 'fail',
-		message: 'Nope',
-	});
-}
-
 module.exports = {
 	index,
 	show,
 	store,
-	update,
-	destroy,
+	update
 }

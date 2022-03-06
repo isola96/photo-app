@@ -15,7 +15,4 @@ router.post('/', albumValidationRules.createRules, albumController.store);
 /* Update a specific album */
 router.put('/:albumId', albumValidationRules.updateRules,albumController.update);
 
-/* Destroy a specific album */
-router.delete('/:albumId', albumController.destroy);
-
 module.exports = router;
