@@ -17,9 +17,9 @@
 
 		return Promise.resolve();
 	}),
-    body('password').exists().isLength({min:8}),
-    body('first_name').exists().isLength({min:2}),
-    body('last_name').exists().isLength({min:2}),
+    body('password').exists().isLength({min:6}),
+    body('first_name').exists().isLength({min:3}),
+    body('last_name').exists().isLength({min:3}),
  ];
  
  /**
@@ -27,9 +27,9 @@
   */
  const updateRules = [
      body('email').optional().isLength({min:6}),
-     body('password').optional().isLength({min:8}),
-    body('first_name').optional().isLength({min:2}),
-    body('last_name').optional().isLength({min:2}),
+     body('password').optional().isLength({min:6}),
+    body('first_name').optional().isLength({min:3}),
+    body('last_name').optional().isLength({min:3}),
  ];
  
  module.exports = {
