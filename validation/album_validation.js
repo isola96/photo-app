@@ -10,6 +10,7 @@
   */
  const createRules = [
      body('title').exists().isLength({ min: 2 }),
+     body('user_id').exists().isLength({ min: 1 }),
  ];
  
  /**

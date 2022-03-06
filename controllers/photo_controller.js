@@ -7,7 +7,7 @@ const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
 /**
- * Get all resources
+ * Get all photos
  *
  * GET /
  */
@@ -23,9 +23,9 @@ const index = async (req, res) => {
 }
 
 /**
- * Get a specific resource
+ * Get a specific photo
  *
- * GET /:exampleId
+ * GET /:photoId
  */
 const show = async (req, res) => {
 	const photo = await new models.Photo({ id: req.params.photoId })
@@ -40,7 +40,7 @@ const show = async (req, res) => {
 }
 
 /**
- * Store a new resource
+ * Store a new photo
  *
  * POST /
  */
@@ -75,17 +75,17 @@ const store = async (req, res) => {
 }
 
 /**
- * Update a specific resource
+ * Update a specific photo
  *
- * PUT /:exampleId
+ * PUT /:photoId
  */
 const update = async (req, res) => {
 	const photoId = req.params.photoId;
 
-	// make sure example exists
+	// make sure photo exists
 	const photo = await new models.Photo({ id: photoId }).fetch({ require: false });
 	if (!example) {
-		debug("Photo to update was not found. %o", { id: exampleId });
+		debug("Photo to update was not found. %o", { id: photoId });
 		res.status(404).send({
 			status: 'fail',
 			data: 'Photo Not Found',
@@ -123,7 +123,7 @@ const update = async (req, res) => {
 }
 
 /**
- * Destroy a specific resource
+ * Destroy a specific photo
  *
  * DELETE /:exampleId
  */

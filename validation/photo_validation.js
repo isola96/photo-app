@@ -12,6 +12,7 @@
      body('title').exists().isLength({ min: 4 }),
      body('url').exists().isLength({ min: 4 }),
      body('comment').optional().isLength({ min: 3 }),
+     body('user_id').exists().isLength({ min: 1 }),
  ];
  
  /**
