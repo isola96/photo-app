@@ -29,7 +29,7 @@ const index = async (req, res) => {
  */
 const show = async (req, res) => {
 	const album = await new models.Album({ id: req.params.albumId })
-		.fetch();
+		.fetch(); // { withRelated: ['photo']}
 
 	res.send({
 		status: 'success',

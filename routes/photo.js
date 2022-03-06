@@ -15,7 +15,9 @@ router.post('/', photoValidationRules.createRules, photoController.store);
 /* Update a specific photo */
 router.put('/:photoId', photoValidationRules.updateRules, photoController.update);
 
-/* Destroy a specific photo */
+
+/* Destroy a specific photo 
 router.delete('/:photoId', photoController.destroy);
+*/
 
 module.exports = router;

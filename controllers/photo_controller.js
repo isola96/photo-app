@@ -84,7 +84,7 @@ const update = async (req, res) => {
 
 	// make sure photo exists
 	const photo = await new models.Photo({ id: photoId }).fetch({ require: false });
-	if (!example) {
+	if (!photo) {
 		debug("Photo to update was not found. %o", { id: photoId });
 		res.status(404).send({
 			status: 'fail',
@@ -122,22 +122,9 @@ const update = async (req, res) => {
 	}
 }
 
-/**
- * Destroy a specific photo
- *
- * DELETE /:exampleId
- */
-const destroy = (req, res) => {
-	res.status(400).send({
-		status: 'fail',
-		message: 'You need to write the code for deleting this resource yourself.',
-	});
-}
-
 module.exports = {
 	index,
 	show,
 	store,
 	update,
-	destroy,
 }
